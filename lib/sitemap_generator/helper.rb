@@ -4,7 +4,6 @@ require 'action_controller'
 module SitemapGenerator
   module Helper
     include ActionController::UrlWriter
-
     def self.included(base)
       base.class_eval do
         def self.default_url_options(options = nil)
@@ -14,7 +13,7 @@ module SitemapGenerator
     end
 
     def load_sitemap_rb
-      sitemap_mapper_file = File.join(RAILS_ROOT, 'config/sitemap.rb')
+      sitemap_mapper_file = File.join(RAILS_ROOT, ENV['config_file'] || 'config/sitemap.rb')
       eval(open(sitemap_mapper_file).read)
     end
     

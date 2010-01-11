@@ -49,7 +49,7 @@ class SiteMapCreateTask < Rake::Task
       buffer = ''
       xml = Builder::XmlMarkup.new(:target=>buffer)
       eval(open(SitemapGenerator.templates[:sitemap_xml]).read, binding)
-      filename = File.join(RAILS_ROOT, "public/sitemap#{index+1}.xml.gz")
+      filename = File.join(RAILS_ROOT, "public/#{SitemapGenerator::Sitemap.files_directory}/#{SitemapGenerator::Sitemap.files_prefix}_sitemap#{index+1}.xml.gz")
       Zlib::GzipWriter.open(filename) do |gz|
         gz.write buffer
       end
@@ -64,7 +64,7 @@ class SiteMapCreateTask < Rake::Task
     buffer = ''
     xml = Builder::XmlMarkup.new(:target=>buffer)
     eval(open(SitemapGenerator.templates[:sitemap_index]).read, binding)
-    filename = File.join(RAILS_ROOT, "public/sitemap_index.xml.gz")
+    filename = File.join(RAILS_ROOT, "public/#{SitemapGenerator::Sitemap.files_directory}/#{SitemapGenerator::Sitemap.files_prefix}_sitemap_index.xml.gz")
     Zlib::GzipWriter.open(filename) do |gz|
       gz.write buffer
     end

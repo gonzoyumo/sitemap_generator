@@ -1,11 +1,18 @@
 module SitemapGenerator
   class LinkSet
-    attr_accessor :default_host, :yahoo_app_id, :links
+    attr_accessor :default_host, :yahoo_app_id, :links, :files_prefix, :files_directory
     
     def initialize
       @links = []
     end
-
+    
+    def files_prefix=(files_prefix)
+      @files_prefix = files_prefix
+    end
+    def files_directory=(files_directory)
+      @files_directory = files_directory
+    end
+    
     def default_host=(host)
       @default_host = host
       add_default_links
